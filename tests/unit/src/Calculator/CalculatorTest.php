@@ -22,10 +22,13 @@ class CalculatorTest extends PHPUnit_Framework_TestCase
      */
     public function testItCanSumTwoNumbersCorrectly($a, $b, $result)
     {
-        $this->markTestSkipped("Test needs to be redefined, since class's implementation has changed");
+        $this->calculator->enterNumber($a);
+        $this->calculator->enterNumber($b);
+        $this->calculator->sumNumbers($b);
+
         $this->assertEquals(
             $result,
-            $this->calculator->sum($a, $b),
+            $this->calculator->result(),
             "{$a} plus {$b} should equals to {$result}"
         );
     }

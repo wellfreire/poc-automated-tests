@@ -1,18 +1,27 @@
 default:
     autoload:
-        '': %paths.base%/tests/integration/features/bootstrap
+        '': %paths.base%/tests/behavior/features/bootstrap
+    extensions:
+        Behat\MinkExtension:
+            base_url:  'http://poc-automated-tests.dev'
+            browser_name: firefox
+            sessions:
+                default:
+                    goutte: ~
+                javascript:
+                    selenium2: ~
     suites:
         domain:
-            paths:
-                - %paths.base%/tests/integration/features
             contexts: [DomainModelContext]
             filters:
                 tags:
                     @domain
-        ui:
             paths:
-                - %paths.base%/tests/integration/features
+                - %paths.base%/tests/behavior/features
+        ui:
             contexts: [UIContext]
             filters:
                 tags:
                     @ui
+            paths:
+                - %paths.base%/tests/behavior/features

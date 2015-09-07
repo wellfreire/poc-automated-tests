@@ -2,9 +2,14 @@
     "require-dev": {
         "phpunit/phpunit": "4.8.*",
         "behat/behat": "3.0.*",
-        "behat/mink-extension": "2.0.*"
+        "behat/mink-extension": "2.0.*",
+        "behat/mink-goutte-driver": "^1.1",
+        "behat/mink-selenium2-driver": "^1.2"
     },
     "autoload": {
         "psr-4": {"Calculator\\": "src/Calculator"}
+    },
+    "require": {
+        "twig/twig": "~1.0"
     }
 }

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <form id="form-calculator" action="/add" method="POST">
+        <label for="number-1">number 1</label>
+        <input type="text" id="number-1" name="number_1">
+        <br>
+        <label for="number-2">number 2</label>
+        <input type="text" id="number-2" name="number_2">
+        <br>
+        <button id="btn-result">result</button>
+    </form>    
+{% endblock %}

@@ -4,6 +4,7 @@ Feature: Calculator Sum
     I need to be able to sum two numbers
 
     @domain
+    @ui #@javascript
     Scenario: adding 2 numbers
         Given I have supplied number 2
         And I have supplied number 5

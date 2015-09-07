@@ -5,8 +5,29 @@
 */
 class CalculatorApp
 {
+    private $calculatorController;
+
+    public function __construct()
+    {
+        $this->calculatorController = new Calculator\CalculatorController();
+    }
+    
     public function run()
     {
-        echo 'App successfuly started!';
+        return $this->routeRequest();
+    }
+
+    private function routeRequest()
+    {
+        switch ($_SERVER['REQUEST_URI']) {
+            case '/add':
+                return $this->calculatorController->addAction();
+                break;
+
+            case '':
+            default:
+                return $this->calculatorController->indexAction();
+                break;
+        }
     }
 }
