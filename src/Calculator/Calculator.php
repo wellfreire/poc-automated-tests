@@ -8,14 +8,29 @@ namespace Calculator;
 class Calculator
 {
     /**
-     * Sums two supplied numbers
-     *
-     * @param number $a
-     * @param number $b
-     * @return number
+     * @var array
      */
-    public function sum($a, $b)
+    private $numbers;
+
+    private $result;
+
+    public function __construct()
     {
-        return $a + $b;
+        $this->numbers = [];
+    }
+
+    public function enterNumber($number)
+    {
+        array_push($this->numbers, $number);
+    }
+
+    public function sumNumbers()
+    {
+        $this->result = array_sum($this->numbers);
+    }
+
+    public function result()
+    {
+        return $this->result;
     }
 }

@@ -1,0 +1,18 @@
+default:
+    autoload:
+        '': %paths.base%/tests/integration/features/bootstrap
+    suites:
+        domain:
+            paths:
+                - %paths.base%/tests/integration/features
+            contexts: [DomainModelContext]
+            filters:
+                tags:
+                    @domain
+        ui:
+            paths:
+                - %paths.base%/tests/integration/features
+            contexts: [UIContext]
+            filters:
+                tags:
+                    @ui
