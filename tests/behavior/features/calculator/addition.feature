@@ -4,9 +4,11 @@ Feature: Calculator Sum
     I need to be able to sum two numbers
 
     @domain
-    @ui #@javascript
+    @ui @javascript
     Scenario: adding 2 numbers
-        Given I have supplied number 2
-        And I have supplied number 5
-        When I ask for their sum
+        Given I am on calculator
+        And I enter the number 2
+        And I enter the addition operator
+        And I enter the number 5
+        When I ask for the result
         Then the result should be 7

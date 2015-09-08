@@ -20,8 +20,8 @@ class CalculatorApp
     private function routeRequest()
     {
         switch ($_SERVER['REQUEST_URI']) {
-            case '/add':
-                return $this->calculatorController->addAction();
+            case '/result':
+                return $this->calculatorController->resultAction();
                 break;
 
             case '':

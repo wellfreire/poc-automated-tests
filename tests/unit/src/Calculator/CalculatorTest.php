@@ -23,8 +23,8 @@ class CalculatorTest extends PHPUnit_Framework_TestCase
     public function testItCanSumTwoNumbersCorrectly($a, $b, $result)
     {
         $this->calculator->enterNumber($a);
+        $this->calculator->enterOperator('+');
         $this->calculator->enterNumber($b);
-        $this->calculator->sumNumbers($b);
 
         $this->assertEquals(
             $result,

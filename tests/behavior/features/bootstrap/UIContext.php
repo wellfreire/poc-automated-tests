@@ -2,8 +2,6 @@
 
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
-use Behat\Gherkin\Node\PyStringNode;
-use Behat\Gherkin\Node\TableNode;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Behat\Hook\Scope\AfterScenarioScope;
 
@@ -12,13 +10,9 @@ use Behat\Behat\Hook\Scope\AfterScenarioScope;
  */
 class UIContext extends Behat\MinkExtension\Context\MinkContext implements Context, SnippetAcceptingContext
 {
-    private $numberIndex = 0;
-
      /** @BeforeScenario */
     public function before(BeforeScenarioScope $scope)
     {
-        $this->getSession()->visit('http://poc-automated-tests.dev/');
-        // $this->getSession()->getDriver()->resizeWindow(1300, 700, 'current');
     }
 
     /** @AfterScenario */
@@ -28,20 +22,45 @@ class UIContext extends Behat\MinkExtension\Context\MinkContext implements Conte
     }
 
     /**
-     * @Given I have supplied number :number
+     * @Given /^I am on calculator$/
      */
-    public function iHaveSuppliedNumber($number)
+    public function iAmOnCalculator()
     {
-        $this->numberIndex++;
-        $this->getSession()->getPage()
-            ->findById("number-".$this->numberIndex)
-            ->setValue($number);
+        $this->getSession()->visit('http://poc-automated-tests.dev/');
     }
 
     /**
-     * @When I ask for their sum
+     * @Given /^I enter the number (\d+)$/
      */
-    public function iAskForTheirSum()
+    public function iEnterTheNumber($number)
+    {
+        $inputField = $this->getSession()->getPage()
+            ->findById("form-calculator")
+            ->findField('expression');
+
+        $expression = $inputField->getValue() . $number;
+
+        $inputField->setValue($expression);
+    }
+
+    /**
+     * @Given /^I enter the addition operator$/
+     */
+    public function iEnterTheAdditionOperator()
+    {
+        $inputField = $this->getSession()->getPage()
+            ->findById("form-calculator")
+            ->findField('expression');
+
+        $expression = $inputField->getValue() . '+';
+
+        $inputField->setValue($expression);
+    }
+
+    /**
+     * @When /^I ask for the result$/
+     */
+    public function iAskForTheResult()
     {
         $this->getSession()->getPage()
             ->findById("btn-result")
@@ -49,7 +68,7 @@ class UIContext extends Behat\MinkExtension\Context\MinkContext implements Conte
     }
 
     /**
-     * @Then the result should be :result
+     * @Then /^the result should be (\d+)$/
      */
     public function theResultShouldBe($result)
     {

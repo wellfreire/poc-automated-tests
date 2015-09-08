@@ -10,27 +10,31 @@ class Calculator
     /**
      * @var array
      */
-    private $numbers;
-
-    private $result;
+    private $entries;
 
     public function __construct()
     {
-        $this->numbers = [];
+        $this->entries = [];
     }
 
     public function enterNumber($number)
     {
-        array_push($this->numbers, $number);
+        array_push($this->entries, $number);
     }
 
-    public function sumNumbers()
+    public function enterOperator($operator)
     {
-        $this->result = array_sum($this->numbers);
+        array_push($this->entries, $operator);
     }
 
     public function result()
     {
-        return $this->result;
+        $expression = implode('', $this->entries);
+        return eval("return ({$expression});");
+    }
+
+    public function availableOperations()
+    {
+        return array('+');
     }
 }

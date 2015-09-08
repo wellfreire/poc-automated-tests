@@ -6,19 +6,14 @@ class CalculatorController
 {
     public function indexAction()
     {
-        return $this->render('calculator');
+        $this->render('calculator');
     }
 
-    public function addAction()
+    public function resultAction()
     {
-        $calculator = new Calculator();
-
-        $calculator->enterNumber($_POST['number_1']);
-        $calculator->enterNumber($_POST['number_2']);
-        $calculator->sumNumbers();
-
-        return $this->render('result', array(
-            'result' => $calculator->result(),
+        $calculatorService = new CalculatorService();
+        $this->render('result', array(
+            'result' => $calculatorService->resultOfExpression($_POST['expression']),
         ));
     }
 

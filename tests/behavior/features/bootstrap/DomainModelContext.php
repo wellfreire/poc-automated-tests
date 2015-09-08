@@ -2,8 +2,6 @@
 
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
-use Behat\Gherkin\Node\PyStringNode;
-use Behat\Gherkin\Node\TableNode;
 
 /**
  * Defines application features from the specific context.
@@ -15,37 +13,50 @@ class DomainModelContext implements Context, SnippetAcceptingContext
      */
     private $calculator;
 
-    public function __construct(array $parameters = array())
+    private $result;
+
+    public function __construct() { }
+
+    /**
+     * @Given /^I am on calculator$/
+     */
+    public function iAmOnCalculator()
     {
-        if (! isset($this->calculator)) {
-           $this->calculator = new Calculator\Calculator();
-        }
+        $this->calculator = new Calculator\Calculator();
     }
 
     /**
-     * @Given I have supplied number :number
+     * @Given /^I enter the number (\d+)$/
      */
-    public function iHaveSuppliedNumber($number)
+    public function iEnterTheNumber($number)
     {
         $this->calculator->enterNumber($number);
     }
 
     /**
-     * @When I ask for their sum
+     * @Given /^I enter the addition operator$/
      */
-    public function iAskForTheirSum()
+    public function iEnterTheAdditionOperator()
     {
-        $this->calculator->sumNumbers();
+        $this->calculator->enterOperator('+');
     }
 
     /**
-     * @Then the result should be :result
+     * @When /^I ask for the result$/
+     */
+    public function iAskForTheResult()
+    {
+        $this->result = $this->calculator->result();
+    }
+
+    /**
+     * @Then /^the result should be (\d+)$/
      */
     public function theResultShouldBe($result)
     {
         PHPUnit_Framework_TestCase::assertEquals(
             $result,
-            $this->calculator->result(),
+            $this->result,
             "The result should be: {$result}"
         );
     }
