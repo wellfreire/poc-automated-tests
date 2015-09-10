@@ -2,10 +2,14 @@
 
 {% block body %}
     <form id="form-calculator" action="/result" method="POST">
-        <label for="expression">Calculator</label>
-        <br>
+        <label for="expression">Calculator</label><br>
         <input type="text" id="expression" name="expression">
         <br>
-        <button id="btn-result">result</button>
-    </form>    
+        {% include 'partial/numpad.html.twig' %}
+        <br><br>
+        <button type="submit" id="btn-result">result</button>
+    </form>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="application/javascript" src="static/js/calculator.js"></script>
 {% endblock %}
